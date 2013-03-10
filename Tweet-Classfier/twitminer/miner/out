@@ -1,0 +1,10 @@
+Welcome to Tweet Classifier
+Training Data
+Validation data
+This is the tweet classifier
+Tweet Class : Politics or Sports
+Tweet Class : Politics or Sports
+['Politics', 'Sports']
+Length of 1  15523
+Length of 2  15500
+Common  2878
