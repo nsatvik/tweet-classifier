@@ -1,3 +1,4 @@
+
 '''
 Created on Mar 10, 2013
 
@@ -6,7 +7,7 @@ Created on Mar 10, 2013
 import sys
 import re
 from tweet import twitter_post
-import tweet_classifier
+from tweet_classifier import rule_based_classifier
 
 def write_to_outputfile(tweets,file_path):
     f = open(file_path,'w')
@@ -30,6 +31,7 @@ def main():
     print 'Welcome to Tweet Classifier'    
     if len(sys.argv)<3 :
         print 'Usage python tweet_miner.py [training_file_path/file_name] [validation file_path/file_name]'
+        exit()
     
     trainer_data = get_file_data(sys.argv[1])
     validation_data = get_file_data(sys.argv[2])
@@ -42,14 +44,14 @@ def main():
     for tweet_data in validation_data:
         validation_tweets.append(twitter_post.Tweet(tweet_data,1))
         #validation_tweets[-1].print_out();
-    '''
-    t_classifier = tweet_classifier()
+    
+    t_classifier = rule_based_classifier.RuleBasedClassifier()
     t_classifier.train(training_tweets)
     t_classifier.stablize()
     t_classifier.validate(validation_tweets)
     #t_classifier.display_datastructures()
     write_to_outputfile(validation_tweets,'outputfile.txt')
-    '''
+    print 'Output written to outputfile.txt'
 
 
 if __name__=='__main__':
