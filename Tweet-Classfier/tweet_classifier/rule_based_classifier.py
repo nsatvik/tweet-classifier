@@ -4,6 +4,7 @@ Created on Mar 10, 2013
 @author: Satvik
 '''
 from data_holder import Class_Specific_Data
+from tweet_classifier.data_holder import Data_Store_RuleBsdClassifier
 
 class RuleBasedClassifier(object):
     '''
@@ -23,7 +24,7 @@ class RuleBasedClassifier(object):
                 self.tweet_classes[tweet.get_class()].add(tweet)
             except KeyError:
                 pass
-                self.tweet_classes[tweet.get_class()] = Class_Specific_Data(tweet.get_class())
+                self.tweet_classes[tweet.get_class()] = Data_Store_RuleBsdClassifier(tweet.get_class())
                 
     def stablize(self):
         cs = self.tweet_classes.keys()
@@ -58,8 +59,11 @@ class RuleBasedClassifier(object):
 
 
     #print 'Common Words Removed : ',common
-
-    
+    def display_tags(self):
+        return dict([(c,self.tweet_classes[c].get_tags()) for c in self.tweet_classes.keys()])
+    '''
+    Method used to Validate the tweets
+    '''
     def validate(self, tweets):
         for tweet in tweets:
             vals = []
@@ -71,7 +75,9 @@ class RuleBasedClassifier(object):
                 tweet.set_class(vals[0][1])
             else:
                 tweet.set_class(vals[1][1])
-    
+    '''
+    This method is used to display the underlying datastructures while debugging.
+    '''
     def display_datastructures(self):
         cs = self.tweet_classes.keys()
         for c in cs:

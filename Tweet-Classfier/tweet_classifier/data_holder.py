@@ -3,21 +3,24 @@ Created on Mar 10, 2013
 
 @author: Satvik
 '''
-from tweet import twitter_post
+
 import math
 
+#This class holds the class specific data for all the tweets.
 class Class_Specific_Data:
-    tweet_class = '' #Name of the class the tweet belongs to 
-    tweet_words = {}
-    tweet_tags = {}
-    tweet_pos = {}
-    n = 0
+    tweet_class = '' #Name of the class all the tweet belongs to 
+    tweet_words = {} #All the words that appear in tweet classified as tweet_class.
+    tweet_tags = {} #All the tags that appear for a particular tweet_class
+    tweet_pos = {} #Pos tags to word mapping.
+    n = 0 #Total no. of tweets that belong to the tweet_class.
     
     def __init__(self,classname):
         self.tweet_class = classname
         self.tweet_words = {}
         self.tweet_class = {}
         self.n = 0
+    
+    #Add the tweet to the maintained instance variables and increment their corresponding count.
     def add(self,tweet):
         self.n += 1
         for tag in tweet.get_tags():
@@ -30,6 +33,17 @@ class Class_Specific_Data:
                 self.tweet_words[word] += 1
             except KeyError:
                 self.tweet_words[word] = 1
+    #Returns the list of words that appear for a particular tweet_class.
+    def get_words_list(self):
+        return self.tweet_words.keys()
+
+#This class inherits from the Class_Specific_Data class and implements 
+#a few extra methods for using the Rule Based Classifier.
+class Data_Store_RuleBsdClassifier(Class_Specific_Data):
+    def __init__(self,class_label):
+        self.tweet_class = class_label
+    
+    #Returns the probability    
     def get_prob(self,word):
         probability = 0
         try:
@@ -54,9 +68,8 @@ class Class_Specific_Data:
             prob_words += self.get_prob(word)
                
         return prob_tags+prob_words
-    
-    def get_words_list(self):
-        return self.tweet_words.keys()
+    def get_tags(self):
+        return self.tweet_tags.keys()
     
     def remove_words(self,words):
         m = max(self.tweet_words.values())
@@ -68,17 +81,3 @@ class Class_Specific_Data:
                     del self.tweet_words[word]
             except KeyError:
                 pass
-            
-    
-
-class Tweet_Data_Store:
-    '''
-    classdocs
-    '''
-    tweet_classes = {} # This is a hash-map of class to Class_specific data
-
-    def __init__(self,params):
-        '''
-        Constructor
-        '''
-        print 'Global Data Holder!'
