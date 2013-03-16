@@ -1,0 +1,36 @@
+Instructions to run the project in linux.
+
+(*) The .zip contains the Tweet-Classifier project and Instructions.txt/README.txt.
+-------------------------------------------------------------------------------------------------------------
+This project was developed using the nltk library. 
+To install nltk Please visit this link http://nltk.org/install.html
+Also install the nltk data for stop words, pos tagger. 
+Please follow the instructions here for downloading the corpus data http://nltk.org/data.html.
+
+The keywords/identifiers for these corpa are (need to be specified while installing the data)
+1) stopwords
+2) maxent_treebank_pos
+-------------------------------------------------------------------------------------------------------------
+Tweet-Classifier is the project.
+
+
+To buid and run the project
+
+:~$ cd Tweet-Classifier/
+
+:~/Tweet-Classifier$ ls
+
+outputfile.txt  tweet tweet_miner_main.py   validation.txt
+training.txt    tweet_classifier  updated_training_file.txt
+
+:~/Tweet-Classifier$ python tweet_miner_main.py updated_training_file.txt validation.txt test.txt
+
+Welcome to Tweet Classifier
+Training in Progress!
+Validation in Progress...
+Validation Training in Progress...
+Testing in Progress...
+Output written to test_outputfile.txt
+
+-------------------------------------------------------------------------------------------------------------
+The output file contains the test data in the format <tweetid label> and this can be used for finding the final accuracy.
